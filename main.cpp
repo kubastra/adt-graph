@@ -9,5 +9,7 @@ int main(){
 
     graph.print();
 
+    graph.removeVertex(7);
+    graph.print();
     return 0;
 }

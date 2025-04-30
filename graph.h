@@ -23,7 +23,62 @@ public:
     }
 
     void removeVertex(int vertex) {
+        int index = getIndex(vertex);
 
+        if (index == -1) return;
+
+        adjaMatrix.erase(adjaMatrix.begin() + index);
+
+        for (auto &row : adjaMatrix) {
+            row.erase(row.begin() + index);
+        }
+
+        vertexValues.erase(vertexValues.begin() + index);
+
+    }
+
+    bool adjacent(int x, int y) { return adjaMatrix[x][y] != 0; }
+
+    std::vector<int> neighbours(int vertex) {
+        std::vector<int> neighbours;
+        int index = getIndex(vertex);
+
+        for (int i = 0; i < adjaMatrix.size(); i++) {
+            if (adjaMatrix[i][index] == 1) {
+                neighbours.push_back(vertexValues[i]);
+            }
+        }
+        return neighbours;
+    }
+    int getIndex(int vertex) {
+        int index = -1;
+        for (int i = 0; i < vertexValues.size(); i++) {
+            if (vertexValues[i] == vertex) {
+                index = i;
+                return index;
+            }
+        }
+    }
+    void addEdge(int x, int y) {
+        int index_x = getIndex(x);
+        int index_y = getIndex(y);
+
+        adjaMatrix[index_x][index_y] = 1;
+        adjaMatrix[index_y][index_x] = 1;
+    }
+
+    int getEdgeValue(int x, int y) {
+        int index_x = getIndex(x);
+        int index_y = getIndex(y);
+
+        return adjaMatrix[index_x][index_y];
+    }
+
+    void setEdgeValue(int x, int y) {
+        int index_x = getIndex(x);
+        int index_y = getIndex(y);
+        adjaMatrix[index_x][index_y] = 1;
+        adjaMatrix[index_y][index_x] = 1;
     }
 
     void print() {
