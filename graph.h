@@ -67,6 +67,14 @@ public:
         adjaMatrix[index_y][index_x] = 1;
     }
 
+    void removeEdge(int x, int y) {
+        int index_x = getIndex(x);
+        int index_y = getIndex(y);
+
+        adjaMatrix[index_x][index_y] = 0;
+        adjaMatrix[index_y][index_x] = 0;
+    }
+
     int getEdgeValue(int x, int y) {
         int index_x = getIndex(x);
         int index_y = getIndex(y);
